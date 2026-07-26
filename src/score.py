@@ -21,6 +21,25 @@ def _keyword_score(text: str, high_keywords: list[str], medium_keywords: list[st
     return score
 
 
+def filter_relevant(
+    articles: list[Article],
+    high_keywords: list[str],
+    medium_keywords: list[str],
+) -> list[Article]:
+    """제목/요약에 AI 관련 키워드가 하나도 없는 기사는 후보에서 제외한다.
+
+    소스 가중치나 최신성만으로 후보에 오르는 것을 막아, 실제로 AI 관련성이
+    확인되지 않은 기사(예: 'anthropic'이 철학 용어로 쓰인 글)가 AI 뉴스처럼
+    브리핑에 섞여 들어가는 것을 방지한다.
+    """
+    relevant = []
+    for article in articles:
+        text = f"{article.title} {article.summary}"
+        if _keyword_score(text, high_keywords, medium_keywords) > 0:
+            relevant.append(article)
+    return relevant
+
+
 def score_articles(
     articles: list[Article],
     high_keywords: list[str],

@@ -50,6 +50,6 @@ def record_call(state: dict, provider: str) -> dict:
 def under_soft_cap(state: dict, provider: str, soft_cap: int) -> bool:
     count = get_today_count(state, provider)
     if count >= soft_cap:
-        print(f"[usage] '{provider}' 일일 소프트 캡({soft_cap}회) 도달 — 다음 폴백 단계로 전환합니다.")
+        print(f"[usage] '{provider}' 일일 소프트 캡({soft_cap}회) 도달 - 다음 폴백 단계로 전환합니다.")
         return False
     return True

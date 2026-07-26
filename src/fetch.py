@@ -8,17 +8,19 @@ from .models import Article
 FEED_TIMEOUT_SECONDS = 15
 
 
-def _parse_published(entry) -> datetime:
+def _parse_published(entry) -> datetime | None:
     for key in ("published_parsed", "updated_parsed"):
         struct = getattr(entry, key, None)
         if struct:
             return datetime.fromtimestamp(calendar.timegm(struct), tz=timezone.utc)
-    # 날짜 정보가 없는 피드는 지금 막 올라온 것으로 취급 (누락보다 노출이 안전)
-    return datetime.now(timezone.utc)
+    # 발행일을 확인할 수 없는 기사는 "최신"으로 간주하지 않는다 (오래된 글이 최신으로
+    # 둔갑하는 것을 막기 위해, 못 미더우면 제외하는 쪽을 선택한다).
+    return None
 
 
 def fetch_feed(name: str, url: str, weight: float) -> list[Article]:
     articles: list[Article] = []
+    skipped_no_date = 0
     try:
         parsed = feedparser.parse(url, agent="Mozilla/5.0 (AI-Morning-Brief-Bot)")
     except Exception as exc:  # noqa: BLE001 - 피드 하나가 죽어도 전체 파이프라인은 계속 진행
@@ -34,6 +36,10 @@ def fetch_feed(name: str, url: str, weight: float) -> list[Article]:
         link = getattr(entry, "link", "").strip()
         if not title or not link:
             continue
+        published = _parse_published(entry)
+        if published is None:
+            skipped_no_date += 1
+            continue
         summary = getattr(entry, "summary", "") or ""
         articles.append(
             Article(
@@ -41,10 +47,12 @@ def fetch_feed(name: str, url: str, weight: float) -> list[Article]:
                 link=link,
                 source=name,
                 source_weight=weight,
-                published=_parse_published(entry),
+                published=published,
                 summary=summary,
             )
         )
+    if skipped_no_date:
+        print(f"[fetch] '{name}': 발행일 확인 불가로 {skipped_no_date}건 제외")
     return articles
 
 
