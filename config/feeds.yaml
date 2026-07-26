@@ -1,0 +1,42 @@
+# AI 뉴스 RSS 피드 목록
+# weight: 해당 매체 기사의 기본 중요도 가중치 (공식 기업 블로그가 가장 높음)
+feeds:
+  - name: "OpenAI"
+    url: "https://openai.com/news/rss.xml"
+    weight: 3
+  - name: "Google AI"
+    url: "https://blog.google/technology/ai/rss/"
+    weight: 3
+  - name: "Google DeepMind"
+    url: "https://www.deepmind.com/blog/rss.xml"
+    weight: 3
+  - name: "Hugging Face"
+    url: "https://huggingface.co/blog/feed.xml"
+    weight: 2
+  - name: "TechCrunch AI"
+    url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+    weight: 2
+  - name: "VentureBeat AI"
+    url: "https://venturebeat.com/category/ai/feed/"
+    weight: 2
+  - name: "MIT News AI"
+    url: "https://news.mit.edu/rss/topic/artificial-intelligence2"
+    weight: 2
+  - name: "Ars Technica AI"
+    url: "https://arstechnica.com/ai/feed/"
+    weight: 2
+  - name: "The Verge"
+    url: "https://www.theverge.com/rss/index.xml"
+    weight: 1
+  - name: "Hacker News (AI 언급)"
+    url: "https://hnrss.org/newest?q=AI"
+    weight: 1
+  - name: "Hacker News (Anthropic 언급)"
+    url: "https://hnrss.org/newest?q=Anthropic"
+    weight: 2
+  - name: "Hacker News (OpenAI 언급)"
+    url: "https://hnrss.org/newest?q=OpenAI"
+    weight: 1
+
+# 참고: Anthropic은 공식 RSS 피드를 제공하지 않아 Hacker News 검색 피드로 대체합니다.
+# 피드를 추가/제거하려면 이 목록만 수정하면 됩니다 (코드 변경 불필요).

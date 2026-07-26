@@ -1,0 +1,62 @@
+# 파이프라인 동작 설정
+pipeline:
+  lookback_hours: 30          # 이 시간 이내에 게시된 기사만 후보로 고려
+  dedupe_similarity_threshold: 78   # 제목 유사도(0~100). 이 값 이상이면 같은 사건으로 간주해 병합
+  max_candidates_for_llm: 15  # 중요도 상위 몇 개까지 LLM에게 넘길지 (비용/한도 보호용 캡)
+  max_items_in_brief: 8       # 최종 브리핑에 담을 최대 기사 수
+  telegram_max_chars: 3900    # 텔레그램 1건 메시지 최대 길이 (4096 제한보다 여유있게)
+
+# 중요도 스코어링용 키워드 가중치
+keywords:
+  high:      # 하나 매칭될 때마다 +3점
+    - "OpenAI"
+    - "Anthropic"
+    - "Claude"
+    - "GPT-5"
+    - "GPT-4"
+    - "Gemini"
+    - "DeepMind"
+    - "Llama"
+    - "Mistral"
+    - "xAI"
+    - "Grok"
+    - "acquisition"
+    - "acquire"
+    - "인수"
+    - "funding"
+    - "raises"
+    - "투자"
+    - "billion"
+    - "규제"
+    - "regulation"
+    - "lawsuit"
+    - "소송"
+    - "안전"
+    - "safety"
+    - "AGI"
+    - "shutdown"
+    - "breach"
+  medium:    # 하나 매칭될 때마다 +1.5점
+    - "launch"
+    - "release"
+    - "출시"
+    - "model"
+    - "모델"
+    - "benchmark"
+    - "startup"
+    - "스타트업"
+    - "오픈소스"
+    - "open source"
+    - "API"
+    - "chip"
+    - "반도체"
+    - "Nvidia"
+    - "TPU"
+    - "partnership"
+    - "제휴"
+
+# 무료 API 사용량 가드레일 (하드 리밋이 아니라 '소프트 캡' — 초과 시 경고 로그를 남기고
+# 다음 폴백 단계로 넘어갑니다. 하루 1회 실행 기준으로는 절대 도달하지 않아야 정상입니다.)
+usage_limits:
+  gemini_daily_soft_cap: 20
+  groq_daily_soft_cap: 20
