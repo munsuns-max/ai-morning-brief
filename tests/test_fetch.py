@@ -4,6 +4,8 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 from unittest.mock import patch
 
+import requests
+
 from src.fetch import _parse_published, fetch_feed
 
 
@@ -11,6 +13,16 @@ class FakeParsed:
     def __init__(self, entries, bozo=False):
         self.entries = entries
         self.bozo = bozo
+
+
+class FakeResponse:
+    def __init__(self, content=b"", status_code=200):
+        self.content = content
+        self.status_code = status_code
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            raise requests.exceptions.HTTPError(f"{self.status_code} error")
 
 
 class TestParsePublished(unittest.TestCase):
@@ -34,7 +46,9 @@ class TestParsePublished(unittest.TestCase):
 
 class TestFetchFeedSkipsUndatedEntries(unittest.TestCase):
     @patch("src.fetch.feedparser.parse")
-    def test_entries_without_any_date_are_excluded(self, mock_parse):
+    @patch("src.fetch.requests.get")
+    def test_entries_without_any_date_are_excluded(self, mock_get, mock_parse):
+        mock_get.return_value = FakeResponse(content=b"<rss></rss>")
         entries = [
             SimpleNamespace(title="날짜 없는 오래된 글", link="https://example.com/a", summary="s"),
             SimpleNamespace(
@@ -50,6 +64,37 @@ class TestFetchFeedSkipsUndatedEntries(unittest.TestCase):
 
         self.assertEqual(len(articles), 1)
         self.assertEqual(articles[0].title, "날짜 있는 최신 글")
+
+
+class TestFetchFeedNetworkFailures(unittest.TestCase):
+    """문제 B: 피드 요청에 실제 타임아웃이 걸려 있고, 하나가 죽어도 예외 없이
+    빈 목록을 반환해 전체 파이프라인이 계속 진행될 수 있어야 한다."""
+
+    @patch("src.fetch.requests.get")
+    def test_timeout_returns_empty_list_without_raising(self, mock_get):
+        mock_get.side_effect = requests.exceptions.Timeout("timed out")
+
+        articles = fetch_feed("SlowSource", "http://slow.feed.url", weight=1)
+
+        self.assertEqual(articles, [])
+
+    @patch("src.fetch.requests.get")
+    def test_get_is_called_with_a_timeout_argument(self, mock_get):
+        mock_get.return_value = FakeResponse(content=b"<rss></rss>")
+
+        fetch_feed("TestSource", "http://feed.url", weight=1)
+
+        _, kwargs = mock_get.call_args
+        self.assertIn("timeout", kwargs)
+        self.assertGreater(kwargs["timeout"], 0)
+
+    @patch("src.fetch.requests.get")
+    def test_http_error_status_returns_empty_list_without_raising(self, mock_get):
+        mock_get.return_value = FakeResponse(status_code=403)
+
+        articles = fetch_feed("BlockedSource", "http://blocked.feed.url", weight=1)
+
+        self.assertEqual(articles, [])
 
 
 if __name__ == "__main__":

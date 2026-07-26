@@ -8,15 +8,31 @@ Telegram으로 보내주는 개인용 자동화 시스템. **운영 비용 0원*
 ```
 GitHub Actions (매일 22:00 UTC = 07:00 KST, cron)
    └─ main.py
-        ├─ src/fetch.py      RSS 피드 수집 (config/feeds.yaml)
-        ├─ src/dedupe.py     제목 유사도로 중복 기사 클러스터링
-        ├─ src/score.py      출처 가중치 + 키워드 + 유사보도 수 + 최신성으로 중요도 스코어링
-        ├─ src/summarize.py  Gemini → Groq → 규칙기반+번역, 3단계 무료 폴백
-        └─ src/notify.py     Telegram으로 전송
+        ├─ src/fetch.py         RSS 피드 수집 (config/feeds.yaml). 발행일 확인 안 되는
+        │                       기사는 제외, 요청에는 항상 타임아웃을 건다
+        ├─ src/score.py         filter_relevant()로 AI 키워드 매칭 0인 기사를 후보에서
+        │                       원천 제외한 뒤, 나머지를 중요도 스코어링
+        ├─ src/sent_history.py  이미 보낸 기사(링크/제목 유사도)를 3일치 추적해 후보에서 제외
+        ├─ src/dedupe.py        제목 유사도로 같은 사건을 다루는 기사를 하나로 클러스터링
+        ├─ src/summarize.py     Gemini → Groq → 규칙기반+번역, 3단계 무료 폴백
+        ├─ src/validate.py      LLM 출력에 후보 목록에 없는 링크가 있으면 검증 실패 처리
+        │                       → 폴백 단계로 전환 (hallucination 방지)
+        └─ src/notify.py        Telegram 전송. 마크다운 파싱 실패 시 일반 텍스트로 재시도
 ```
 
 모든 설정(피드 목록, 키워드, 임계값)은 `config/feeds.yaml`, `config/settings.yaml`에 있고,
 코드를 건드리지 않고 수정할 수 있습니다.
+
+### 실제 수집된 뉴스만 사용한다는 보장
+
+- **관련성 필터**: 제목/요약에 AI 키워드가 하나도 없는 기사는 애초에 후보에 오르지 못함
+- **재전송 방지**: `state/sent_history.json`에 최근 3일간 보낸 기사를 기록해, lookback 시간과
+  실행 주기가 겹치는 구간에서 같은 뉴스가 "새 뉴스"로 다시 오는 것을 차단
+- **개수 강제 없음**: LLM에게 항상 5~8개를 채우라고 하지 않고, 실제 후보 수만큼만 요약하도록
+  지시 (후보가 2개면 "최대 2개"라고 지시)
+- **출력 검증**: LLM 응답에 후보 목록에 없는 링크가 하나라도 섞여 있으면 그 응답 전체를 버리고
+  다음 폴백 단계로 전환 (지어낸 내용이 섞인 응답은 신뢰하지 않음)
+- **발행일 없는 기사 제외**: 날짜를 확인할 수 없는 기사는 "최신"으로 간주하지 않고 제외
 
 ## 비용 구조 (왜 0원인가)
 
@@ -100,5 +116,16 @@ $env:GEMINI_API_KEY="..."; $env:DRY_RUN="1"; python main.py
 - LLM 호출은 실행당 정확히 1회, 재시도 최대 2회로 제한
 - LLM에 넘기는 기사는 중요도 상위 15개로 사전 필터링 (입력 토큰 캡)
 - `state/usage.json`에 일별 호출 수를 기록하고, 소프트 캡 초과 시 다음 폴백 단계로 자동 전환
-- 모든 외부 호출에 타임아웃 설정, 워크플로우 자체에 `timeout-minutes: 10` 설정으로 무료 Actions 분(minute) 소진 방지
+- 모든 외부 호출(피드 요청, LLM API, 텔레그램)에 타임아웃 설정, 워크플로우 자체에
+  `timeout-minutes: 10` 설정으로 무료 Actions 분(minute) 소진 방지
 - 유료 API 키는 애초에 시크릿으로 등록하지 않는 한 절대 호출되지 않음
+
+## 테스트
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+핵심 안전장치(관련성 필터, 재전송 방지, 발행일 검증, LLM 출력 검증, 텔레그램 마크다운
+폴백)에 대한 단위 테스트가 `tests/`에 있습니다. 코드를 수정한 뒤에는 항상 이 테스트를
+돌려서 회귀가 없는지 확인하세요.
