@@ -32,10 +32,34 @@ jobs:
         run: python main.py
 
       - name: Commit usage tracker state
+        continue-on-error: true
         run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add state/usage.json state/sent_history.json
-          git diff --cached --quiet || git commit -m "chore: update usage tracker and sent history [skip ci]"
-          git push
+
+          if git diff --cached --quiet; then
+            echo "상태 파일 변경 없음, 커밋 생략"
+            exit 0
+          fi
+
+          git commit -m "chore: update usage tracker and sent history [skip ci]"
+
+          # 이 워크플로우가 체크아웃한 뒤로 원격 master가 움직였을 수 있으므로(다른 push,
+          # 겹쳐 실행된 워크플로우 등), 바로 push하지 않고 rebase 후 재시도한다.
+          for attempt in 1 2 3; do
+            if git push origin HEAD:master; then
+              echo "상태 파일 push 성공 (시도 $attempt)"
+              exit 0
+            fi
+            echo "push 실패 (시도 $attempt/3), 최신 원격 상태로 rebase 후 재시도합니다"
+            if ! git pull --rebase origin master; then
+              echo "rebase 충돌, 중단합니다"
+              git rebase --abort || true
+              break
+            fi
+          done
+
+          echo "::warning::상태 파일(usage.json/sent_history.json) 커밋 push에 실패했습니다. 브리핑 전송 자체는 이미 정상 완료되었습니다."
 
