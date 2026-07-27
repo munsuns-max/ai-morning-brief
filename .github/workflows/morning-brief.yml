@@ -38,3 +38,4 @@ jobs:
           git add state/usage.json state/sent_history.json
           git diff --cached --quiet || git commit -m "chore: update usage tracker and sent history [skip ci]"
           git push
+
