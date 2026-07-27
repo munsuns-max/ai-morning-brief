@@ -59,15 +59,21 @@ def _build_prompt(articles: list[Article], max_items_in_brief: int) -> str:
         "이 중에서 실제로 중요한 소식만 골라 한국어로 브리핑을 작성해줘.",
         "",
         "출력 형식 규칙:",
-        "- 텔레그램 메시지로 바로 보낼 것이므로 마크다운은 굵게(*텍스트*)와 하이픈 목록만 사용하고, "
-        "  #, ##, ``` 같은 문법은 쓰지 마.",
-        "- 맨 위에 '*🌅 AI Morning Brief - {오늘 날짜}*' 제목을 넣어줘.",
-        "- 그 아래 한두 문장으로 오늘의 총평을 적어줘.",
-        f"- 이어서 중요도순으로 최대 {max_items}개 항목을 불릿으로 작성. "
+        "- 텔레그램 메시지로 바로 보낼 것이므로 마크다운은 굵게(*텍스트*)만 사용하고, "
+        "  #, ##, ```, 하이픈 목록 같은 문법은 쓰지 마.",
+        "- 맨 위에 '*🌅 AI Morning Brief - {오늘 날짜}*' 제목을 넣고, 그 아래 한두 문장으로 "
+        "오늘의 총평을 적어줘. 그리고 빈 줄을 하나 넣어.",
+        f"- 이어서 중요도순으로 최대 {max_items}개 항목을 작성. "
         f"후보 중 실제로 다룰 가치가 있는 게 {max_items}개보다 적으면 절대 억지로 개수를 채우지 말고 "
         "있는 만큼만 써 — 개수를 맞추려고 사소한 내용을 부풀리거나 하나의 기사를 여러 항목으로 "
         "쪼개지 마.",
-        "- 각 항목은: '- *제목(한국어로 자연스럽게 의역)* — 2~3문장 한국어 요약. (출처: 매체명, 링크)' 형식.",
+        "- 각 항목은 반드시 아래 4줄 형식을 그대로 지켜서 써 (줄바꿈 위치 포함):",
+        "    🔹 *제목(한국어로 자연스럽게 의역)*",
+        "    2~3문장 한국어 요약",
+        "    (빈 줄)",
+        "    출처: 매체명 | 링크",
+        "- 항목과 항목 사이에는 반드시 빈 줄을 하나 더 넣어서 구분해 (즉, 한 항목의 '출처' 줄과 "
+        "다음 항목의 '🔹 제목' 줄 사이에 빈 줄이 하나 있어야 함).",
         "- 링크는 반드시 아래 후보 목록에 있는 링크를 글자 하나도 바꾸지 말고 그대로 복사해서 써. "
         "후보 목록에 없는 링크나 사실, 수치, 인용을 새로 만들어내지 마. 확실하지 않으면 차라리 "
         "그 항목을 빼.",
@@ -120,8 +126,7 @@ def _extractive_fallback(articles: list[Article], max_items: int) -> str:
     품질은 LLM 요약보다 떨어지지만 API 키/비용 없이 100% 동작을 보장한다.
     """
     today = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d")
-    header = f"*🌅 AI Morning Brief - {today}*\n(⚠️ 이 브리핑은 LLM 요약 없이 자동 생성되었습니다)\n"
-    lines = [header]
+    header = f"*🌅 AI Morning Brief - {today}*\n(⚠️ 이 브리핑은 LLM 요약 없이 자동 생성되었습니다)"
 
     try:
         from deep_translator import GoogleTranslator
@@ -132,6 +137,7 @@ def _extractive_fallback(articles: list[Article], max_items: int) -> str:
         print(f"[summarize] 번역기 초기화 실패, 원문 그대로 사용: {exc}")
         translate = None
 
+    items = []
     for a in articles[:max_items]:
         title_ko = a.title
         snippet_ko = _clean_snippet(a.summary)[:200]
@@ -142,9 +148,9 @@ def _extractive_fallback(articles: list[Article], max_items: int) -> str:
                     snippet_ko = translate(snippet_ko)
             except Exception as exc:  # noqa: BLE001
                 print(f"[summarize] 번역 실패, 원문 유지: {exc}")
-        lines.append(f"- *{title_ko}* — {snippet_ko} (출처: {a.source}, {a.link})")
+        items.append(f"🔹 *{title_ko}*\n{snippet_ko}\n\n출처: {a.source} | {a.link}")
 
-    return "\n".join(lines)
+    return header + "\n\n" + "\n\n".join(items)
 
 
 def _articles_by_normalized_link(articles: list[Article], used_normalized: set[str]) -> list[Article]:
