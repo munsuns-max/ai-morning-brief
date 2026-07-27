@@ -71,12 +71,14 @@ GitHub Actions (매일 22:00 UTC = 07:00 KST, cron)
 
 ## GitHub 저장소 설정
 
+저장소: https://github.com/munsuns-max/ai-morning-brief (public, 기본 브랜치 `master`)
+
+이미 생성 및 push까지 완료되어 있습니다. 처음부터 다시 설정해야 한다면:
 1. GitHub에서 새 **Public** 저장소 생성 (Actions 완전 무료 사용을 위해)
 2. 이 폴더를 push:
    ```bash
    git remote add origin <저장소 URL>
-   git branch -M main
-   git push -u origin main
+   git push -u origin master
    ```
 3. 저장소의 **Settings → Secrets and variables → Actions → New repository secret**에서 아래 4개 등록:
    - `GEMINI_API_KEY`
