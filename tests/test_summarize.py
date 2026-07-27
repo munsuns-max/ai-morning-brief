@@ -1,3 +1,4 @@
+import json
 import os
 import tempfile
 import unittest
@@ -5,7 +6,7 @@ from datetime import datetime, timezone
 from unittest import mock
 
 from src.models import Article
-from src.summarize import _build_prompt, summarize_articles
+from src.summarize import _build_prompt, _render_brief, summarize_articles
 
 # 테스트가 실제 운영 상태 파일(state/usage.json)에 부작용을 남기지 않도록,
 # usage_tracker가 쓰는 파일 경로를 임시 파일로 바꿔치기한다.
@@ -41,6 +42,39 @@ class TestPromptScalesWithCandidateCount(unittest.TestCase):
         prompt = _build_prompt(articles, max_items_in_brief=8)
         self.assertIn("억지로", prompt)
 
+    def test_prompt_asks_for_json_only(self):
+        articles = [make_article(1)]
+        prompt = _build_prompt(articles, max_items_in_brief=8)
+        self.assertIn("JSON", prompt)
+
+
+class TestRenderBrief(unittest.TestCase):
+    """문제: 형식이 프롬프트 지시에 의존하지 않고 코드로 강제되는지 확인."""
+
+    def test_every_item_gets_bold_title_and_emoji(self):
+        items = [
+            {"title": "첫번째", "summary": "요약1", "source": "A", "link": "http://a"},
+            {"title": "두번째", "summary": "요약2", "source": "B", "link": "http://b"},
+        ]
+        text = _render_brief("총평", items)
+        self.assertEqual(text.count("🔹 *"), 2)
+        self.assertIn("🔹 *첫번째*", text)
+        self.assertIn("🔹 *두번째*", text)
+
+    def test_blank_line_separates_every_item(self):
+        items = [
+            {"title": "첫번째", "summary": "요약1", "source": "A", "link": "http://a"},
+            {"title": "두번째", "summary": "요약2", "source": "B", "link": "http://b"},
+        ]
+        text = _render_brief("총평", items)
+        # 한 항목의 '출처' 줄과 다음 항목의 제목 줄 사이에 빈 줄이 있어야 한다.
+        self.assertIn("출처: A | http://a\n\n🔹 *두번째*", text)
+
+    def test_source_line_is_on_its_own_line_after_blank_line(self):
+        items = [{"title": "제목", "summary": "요약", "source": "A", "link": "http://a"}]
+        text = _render_brief("총평", items)
+        self.assertIn("요약\n\n출처: A | http://a", text)
+
 
 class TestSummarizeArticlesFallbackBehaviour(unittest.TestCase):
     @mock.patch.dict(os.environ, {"GEMINI_API_KEY": "", "GROQ_API_KEY": ""})
@@ -58,6 +92,8 @@ class TestSummarizeArticlesFallbackBehaviour(unittest.TestCase):
         # 실제로 수집된 기사의 링크만 브리핑에 등장해야 한다 (지어낸 내용 없음).
         for a in articles:
             self.assertIn(a.link, text)
+        # 폴백도 동일한 렌더러를 거치므로 형식이 강제되어야 한다.
+        self.assertEqual(text.count("🔹 *"), 3)
 
     def test_empty_candidate_list_returns_no_news_message_and_no_included_articles(self):
         settings = {"pipeline": {"max_items_in_brief": 8}, "usage_limits": {}}
@@ -76,8 +112,17 @@ class TestSummarizeArticlesFallbackBehaviour(unittest.TestCase):
         # 문제 5: Gemini가 후보에 없는 링크를 지어내면 그 응답은 버려지고
         # 규칙 기반 폴백으로 전환되어야 한다.
         mock_translator_cls.return_value.translate.side_effect = lambda t: t
-        mock_call_gemini.return_value = (
-            "- *지어낸 뉴스* 요약. (출처: 없음, https://this-link-does-not-exist.example.com/fake)"
+        mock_call_gemini.return_value = json.dumps(
+            {
+                "overview": "오늘의 총평",
+                "items": [
+                    {
+                        "title": "지어낸 뉴스",
+                        "summary": "요약",
+                        "link": "https://this-link-does-not-exist.example.com/fake",
+                    }
+                ],
+            }
         )
 
         articles = [make_article(1)]
@@ -94,9 +139,14 @@ class TestSummarizeArticlesFallbackBehaviour(unittest.TestCase):
     @mock.patch("src.summarize._call_gemini")
     def test_gemini_response_with_only_known_links_is_accepted(self, mock_call_gemini):
         articles = [make_article(1), make_article(2)]
-        mock_call_gemini.return_value = (
-            f"- *뉴스1* 요약. (출처: A, {articles[0].link})\n"
-            f"- *뉴스2* 요약. (출처: B, {articles[1].link})"
+        mock_call_gemini.return_value = json.dumps(
+            {
+                "overview": "오늘의 총평",
+                "items": [
+                    {"title": "뉴스1", "summary": "요약1", "link": articles[0].link},
+                    {"title": "뉴스2", "summary": "요약2", "link": articles[1].link},
+                ],
+            }
         )
         settings = {"pipeline": {"max_items_in_brief": 8}, "usage_limits": {}}
 
@@ -104,6 +154,46 @@ class TestSummarizeArticlesFallbackBehaviour(unittest.TestCase):
 
         self.assertEqual(tier, "gemini")
         self.assertEqual({a.link for a in included}, {articles[0].link, articles[1].link})
+        self.assertEqual(text.count("🔹 *"), 2)
+
+    @mock.patch("src.usage_tracker.USAGE_FILE", _TEST_USAGE_FILE)
+    @mock.patch.dict(os.environ, {"GEMINI_API_KEY": "test-key", "GROQ_API_KEY": ""})
+    @mock.patch("src.summarize._call_gemini")
+    @mock.patch("deep_translator.GoogleTranslator")
+    def test_gemini_response_wrapped_in_code_fence_is_still_parsed(
+        self, mock_translator_cls, mock_call_gemini
+    ):
+        articles = [make_article(1)]
+        mock_call_gemini.return_value = (
+            "```json\n"
+            + json.dumps(
+                {"overview": "총평", "items": [{"title": "뉴스", "summary": "요약", "link": articles[0].link}]}
+            )
+            + "\n```"
+        )
+        settings = {"pipeline": {"max_items_in_brief": 8}, "usage_limits": {}}
+
+        text, tier, included = summarize_articles(articles, settings)
+
+        self.assertEqual(tier, "gemini")
+        self.assertEqual(len(included), 1)
+
+    @mock.patch("src.usage_tracker.USAGE_FILE", _TEST_USAGE_FILE)
+    @mock.patch.dict(os.environ, {"GEMINI_API_KEY": "test-key", "GROQ_API_KEY": ""})
+    @mock.patch("src.summarize._call_gemini")
+    @mock.patch("deep_translator.GoogleTranslator")
+    def test_gemini_response_that_is_not_valid_json_falls_back(
+        self, mock_translator_cls, mock_call_gemini
+    ):
+        mock_translator_cls.return_value.translate.side_effect = lambda t: t
+        mock_call_gemini.return_value = "이건 JSON이 아니라 그냥 자유 텍스트 요약입니다."
+
+        articles = [make_article(1)]
+        settings = {"pipeline": {"max_items_in_brief": 8}, "usage_limits": {}}
+
+        text, tier, included = summarize_articles(articles, settings)
+
+        self.assertEqual(tier, "fallback")
 
 
 if __name__ == "__main__":
