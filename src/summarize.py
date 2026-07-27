@@ -96,6 +96,14 @@ def _post_with_retry(url: str, **kwargs) -> requests.Response:
             resp = requests.post(url, timeout=HTTP_TIMEOUT, **kwargs)
             resp.raise_for_status()
             return resp
+        except requests.exceptions.HTTPError as exc:
+            last_exc = exc
+            # 상태 코드만으로는 429/4xx의 실제 원인(예: 어떤 quota가 초과됐는지)을 알 수
+            # 없어서, 응답 본문을 함께 로그로 남긴다 (키 자체는 이미 마스킹되어 있음).
+            body = exc.response.text[:500] if exc.response is not None else ""
+            print(f"[summarize] 요청 실패 (시도 {attempt}/{MAX_RETRIES}): {exc} | 응답 본문: {body}")
+            if attempt < MAX_RETRIES:
+                time.sleep(2)
         except Exception as exc:  # noqa: BLE001
             last_exc = exc
             print(f"[summarize] 요청 실패 (시도 {attempt}/{MAX_RETRIES}): {exc}")
