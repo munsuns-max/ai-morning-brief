@@ -2,7 +2,9 @@
 pipeline:
   lookback_hours: 30          # 이 시간 이내에 게시된 기사만 후보로 고려
   dedupe_similarity_threshold: 78   # 제목 유사도(0~100). 이 값 이상이면 같은 사건으로 간주해 병합
-  max_candidates_for_llm: 15  # 중요도 상위 몇 개까지 LLM에게 넘길지 (비용/한도 보호용 캡)
+  max_candidates_for_llm: 20  # 중요도 상위 몇 개까지 LLM에게 넘길지 (비용/한도 보호용 캡).
+                               # 피드가 늘어난 만큼(중국 AI 기업 등) 후보 폭을 넓혀 7~8건을
+                               # 채울 실제 후보가 부족해지지 않도록 15→20으로 상향
   max_items_in_brief: 8       # 최종 브리핑에 담을 최대 기사 수
   telegram_max_chars: 3900    # 텔레그램 1건 메시지 최대 길이 (4096 제한보다 여유있게)
 
@@ -20,6 +22,10 @@ keywords:
     - "Mistral"
     - "xAI"
     - "Grok"
+    - "DeepSeek"
+    - "Qwen"
+    - "Baidu"
+    - "Zhipu"
     - "acquisition"
     - "acquire"
     - "인수"
@@ -42,6 +48,13 @@ keywords:
     - "출시"
     - "model"
     - "모델"
+    - "update"
+    - "업데이트"
+    - "feature"
+    - "새 기능"
+    - "기능 추가"
+    - "기능 업데이트"
+    - "upgrade"
     - "benchmark"
     - "startup"
     - "스타트업"

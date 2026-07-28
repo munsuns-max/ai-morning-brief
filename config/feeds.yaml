@@ -8,8 +8,14 @@ feeds:
     url: "https://blog.google/technology/ai/rss/"
     weight: 3
   - name: "Google DeepMind"
-    url: "https://www.deepmind.com/blog/rss.xml"
+    url: "https://deepmind.google/blog/rss.xml"
     weight: 3
+  - name: "Meta AI (Hacker News 언급)"
+    url: "https://hnrss.org/newest?q=Meta+AI"
+    weight: 2
+  - name: "xAI (Hacker News 언급)"
+    url: "https://hnrss.org/newest?q=xAI"
+    weight: 2
   - name: "Hugging Face"
     url: "https://huggingface.co/blog/feed.xml"
     weight: 2
@@ -37,6 +43,19 @@ feeds:
   - name: "Hacker News (OpenAI 언급)"
     url: "https://hnrss.org/newest?q=OpenAI"
     weight: 1
+  - name: "DeepSeek (Hacker News 언급)"
+    url: "https://hnrss.org/newest?q=DeepSeek"
+    weight: 2
+  - name: "Alibaba Qwen (Hacker News 언급)"
+    url: "https://hnrss.org/newest?q=Qwen"
+    weight: 2
+  - name: "Baidu AI (Hacker News 언급)"
+    url: "https://hnrss.org/newest?q=Baidu+AI"
+    weight: 1
+  - name: "Zhipu AI (Hacker News 언급)"
+    url: "https://hnrss.org/newest?q=Zhipu"
+    weight: 1
 
-# 참고: Anthropic은 공식 RSS 피드를 제공하지 않아 Hacker News 검색 피드로 대체합니다.
+# 참고: Anthropic, Meta AI, xAI, DeepSeek, Alibaba Qwen, Baidu, Zhipu AI는 무료로 쓸 수 있는
+# 공식 RSS 피드를 제공하지 않아 Hacker News 검색 피드로 대체합니다.
 # 피드를 추가/제거하려면 이 목록만 수정하면 됩니다 (코드 변경 불필요).
