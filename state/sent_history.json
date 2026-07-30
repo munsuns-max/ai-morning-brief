@@ -1,80 +1,5 @@
 [
   {
-    "link": "https://www.theverge.com/ai-artificial-intelligence/971281/nvidia-open-secure-ai-alliance-cybersecurity",
-    "title": "Nvidia, Microsoft launch open AI security alliance — without OpenAI, Google, or Anthropic",
-    "sent_at": "2026-07-27T15:36:37.001905+00:00"
-  },
-  {
-    "link": "https://www.reuters.com/business/media-telecom/nvidia-talks-with-openai-guarantee-250-billion-financing-data-center-wsj-reports-2026-07-26/",
-    "title": "Nvidia in talks with OpenAI to guarantee $250B financing for data center",
-    "sent_at": "2026-07-27T15:36:37.001905+00:00"
-  },
-  {
-    "link": "https://openai.com/index/how-ai-is-expanding-what-people-do-at-work",
-    "title": "How AI is expanding what people do at work",
-    "sent_at": "2026-07-27T15:36:37.001905+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/07/27/enigma-raises-70m-to-make-controlling-a-robot-as-easy-as-adjusting-the-volume/",
-    "title": "Enigma raises $70M to make controlling a robot as easy as adjusting the volume",
-    "sent_at": "2026-07-27T15:36:37.001905+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/07/27/ilya-sutskevers-safe-superintelligence-partners-with-nvidia-to-scale-its-ai-research/",
-    "title": "Ilya Sutskever’s Safe Superintelligence partners with Nvidia to scale its AI research",
-    "sent_at": "2026-07-27T15:36:37.001905+00:00"
-  },
-  {
-    "link": "https://www.theverge.com/tech/971101/apple-smart-glasses-privacy",
-    "title": "Apple is banking on privacy to set its smart glasses apart",
-    "sent_at": "2026-07-27T15:36:37.001905+00:00"
-  },
-  {
-    "link": "https://www.theverge.com/tech/971358/cxmt-china-ram-stock-market-debut",
-    "title": "Chinese RAM company CXMT makes a $484 billion stock market debut",
-    "sent_at": "2026-07-27T15:36:37.001905+00:00"
-  },
-  {
-    "link": "https://runtimewire.com/article/nvidia-openai-250-billion-backstop-ohio-data-center",
-    "title": "Nvidia weighs $250B backstop for OpenAI's Ohio data center lease",
-    "sent_at": "2026-07-27T17:02:47.744711+00:00"
-  },
-  {
-    "link": "https://runtimewire.com/article/anthropic-safeguard-lowering-claims",
-    "title": "Anthropic allegedly lowered AI safeguards, former employee says",
-    "sent_at": "2026-07-27T17:02:47.744711+00:00"
-  },
-  {
-    "link": "https://www.youtube.com/watch?v=L0iIW6wpSGQ",
-    "title": "Apple Sues OpenAI: The 41-Page Lawsuit Exposing Their Secret War: Lawsuit",
-    "sent_at": "2026-07-27T17:02:47.744711+00:00"
-  },
-  {
-    "link": "https://www.bloomberg.com/news/articles/2026-07-27/nvidia-s-750-billion-deals-revive-fear-of-ai-circular-financing",
-    "title": "Nvidia's $750B in Deals Reignite Circular AI Fears",
-    "sent_at": "2026-07-27T17:02:47.744711+00:00"
-  },
-  {
-    "link": "https://thezvi.substack.com/p/more-on-an-internal-openai-model",
-    "title": "More on an Internal OpenAI Model Hacking into HuggingFace",
-    "sent_at": "2026-07-27T17:02:47.744711+00:00"
-  },
-  {
-    "link": "https://www.wsj.com/tech/ai/amd-and-anthropic-sign-major-chips-and-investment-deal-4adfdc45",
-    "title": "AMD and Anthropic Sign Major Chips-and-Investment Deal",
-    "sent_at": "2026-07-27T22:54:55.830346+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/",
-    "title": "PSA: Your Claude shared chats and Artifacts may have ended up on Google",
-    "sent_at": "2026-07-27T22:54:55.830346+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/07/27/openais-hugging-face-breach-has-reignited-the-debate-over-alignment-and-control/",
-    "title": "OpenAI’s Hugging Face breach has reignited the debate over alignment and control",
-    "sent_at": "2026-07-27T22:54:55.830346+00:00"
-  },
-  {
     "link": "https://www.tomshardware.com/tech-industry/artificial-intelligence/openai-google-and-anthropic-absent-from-nvidia-led-open-secure-ai-alliance-30-companies-join-security-alliance-after-openai-agent-breach",
     "title": "OpenAI, Google, and Anthropic Absent from Nvidia-Led Open Secure AI Alliance",
     "sent_at": "2026-07-28T22:53:35.612756+00:00"
@@ -143,5 +68,45 @@
     "link": "https://www.theverge.com/ai-artificial-intelligence/972709/openai-hardware-greg-brockman-interview",
     "title": "OpenAI president says it&#8217;s &#8216;building a family of devices&#8217; for its AI chatbots",
     "sent_at": "2026-07-29T22:54:25.196638+00:00"
+  },
+  {
+    "link": "https://www.cnbc.com/2026/07/30/open-ai-price-cut-gpt.html",
+    "title": "OpenAI cuts prices for GPT-5.6 AI models as companies grow sensitive to costs",
+    "sent_at": "2026-07-30T22:58:12.272784+00:00"
+  },
+  {
+    "link": "https://arstechnica.com/ai/2026/07/google-reveals-gemini-robotics-2-0-promising-improved-dexterity-and-safety/",
+    "title": "Google reveals Gemini Robotics 2.0, promising improved dexterity and safety",
+    "sent_at": "2026-07-30T22:58:12.272784+00:00"
+  },
+  {
+    "link": "https://fortune.com/2026/07/30/xai-minnesota-lawsuit-nudification-law/",
+    "title": "xAI sues Minnesota over law banning AI 'nudification' tech",
+    "sent_at": "2026-07-30T22:58:12.272784+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/07/29/microsoft-is-openly-competing-with-openai-anthropic-more-than-ever/",
+    "title": "Microsoft is openly competing with OpenAI, Anthropic more than ever",
+    "sent_at": "2026-07-30T22:58:12.272784+00:00"
+  },
+  {
+    "link": "https://www.bloomberg.com/news/articles/2026-07-30/banks-line-up-15-billion-of-debt-for-anthropic-with-google-aid",
+    "title": "Banks Line Up $15B of Debt for Anthropic with Google Aid",
+    "sent_at": "2026-07-30T22:58:12.272784+00:00"
+  },
+  {
+    "link": "https://www.bloomberg.com/news/articles/2026-07-30/deepseek-is-developing-massive-ai-data-center-in-inner-mongolia",
+    "title": "DeepSeek Plans Gigawatt Scale AI Data Center in Inner Mongolia",
+    "sent_at": "2026-07-30T22:58:12.272784+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/07/29/thinking-machines-co-founder-lilian-weng-left-the-company-citing-health-reasons-then-joined-openai/",
+    "title": "Thinking Machines co-founder Lilian Weng left the company citing health reasons, then joined OpenAI",
+    "sent_at": "2026-07-30T22:58:12.272784+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/07/30/in-the-hugging-face-breach-openais-hacker-was-noisy-and-fast-but-not-unstoppable/",
+    "title": "In the Hugging Face breach, OpenAI’s hacker was noisy and fast — but not unstoppable",
+    "sent_at": "2026-07-30T22:58:12.272784+00:00"
   }
 ]
