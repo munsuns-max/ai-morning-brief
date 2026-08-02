@@ -1,45 +1,5 @@
 [
   {
-    "link": "https://www.nbcnews.com/tech/security/openai-anthropic-scientists-ask-us-tools-ai-development-rcna589727",
-    "title": "Scientists at OpenAI and Anthropic ask U.S. for tools to pace AI development",
-    "sent_at": "2026-07-29T22:54:25.196638+00:00"
-  },
-  {
-    "link": "https://openai.com/index/chatgpt-for-academic-researchers",
-    "title": "Accelerating scientific discovery with ChatGPT for Academic Researchers",
-    "sent_at": "2026-07-29T22:54:25.196638+00:00"
-  },
-  {
-    "link": "https://twitter.com/politico/status/2082269586632937717",
-    "title": "OpenAI's rogue models roamed the internet for 4 days and staged a second attack",
-    "sent_at": "2026-07-29T22:54:25.196638+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/07/29/as-ai-content-floods-the-internet-pangram-raises-9m-to-detect-it/",
-    "title": "As AI content floods the internet, Pangram raises $9M to detect it",
-    "sent_at": "2026-07-29T22:54:25.196638+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/07/29/microsoft-logs-3-2b-from-anthropic-investment-but-openai-was-a-mixed-bag/",
-    "title": "Microsoft logs $3.2B from Anthropic investment, but OpenAI was a mixed bag",
-    "sent_at": "2026-07-29T22:54:25.196638+00:00"
-  },
-  {
-    "link": "https://openai.com/index/gpt-5-6-frontier-intelligence-efficiency",
-    "title": "How GPT-5.6 fuses frontier intelligence with frontier efficiency",
-    "sent_at": "2026-07-29T22:54:25.196638+00:00"
-  },
-  {
-    "link": "https://www.theverge.com/policy/972850/xai-grok-minnesota-nudification-lawsuit",
-    "title": "xAI’s last-minute scramble to stop Minnesota’s anti-nudification app law",
-    "sent_at": "2026-07-29T22:54:25.196638+00:00"
-  },
-  {
-    "link": "https://www.theverge.com/ai-artificial-intelligence/972709/openai-hardware-greg-brockman-interview",
-    "title": "OpenAI president says it&#8217;s &#8216;building a family of devices&#8217; for its AI chatbots",
-    "sent_at": "2026-07-29T22:54:25.196638+00:00"
-  },
-  {
     "link": "https://www.cnbc.com/2026/07/30/open-ai-price-cut-gpt.html",
     "title": "OpenAI cuts prices for GPT-5.6 AI models as companies grow sensitive to costs",
     "sent_at": "2026-07-30T22:58:12.272784+00:00"
@@ -123,5 +83,40 @@
     "link": "https://techcrunch.com/2026/07/31/google-nixes-its-earth-ai-feature-one-day-after-launch-amid-criticism-it-would-spread-misinformation/",
     "title": "Google nixes its Earth AI feature one day after launch, amid criticism it would spread misinformation",
     "sent_at": "2026-08-01T22:47:06.269385+00:00"
+  },
+  {
+    "link": "https://www.wired.com/story/openai-anthropic-ai-hacking-sprees-illegal/",
+    "title": "The OpenAI and Anthropic AI Hacking Sprees Are a Messy New Legal Frontier",
+    "sent_at": "2026-08-02T22:48:11.420795+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/08/01/judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps/",
+    "title": "Judge denies xAI’s request to block Minnesota ban on ‘nudify’ apps",
+    "sent_at": "2026-08-02T22:48:11.420795+00:00"
+  },
+  {
+    "link": "https://www.schneier.com/blog/archives/2026/07/anthropics-opus-5-is-better-at-resisting-prompt-injection.html",
+    "title": "Anthropic's Opus 5 Is Better at Resisting Prompt Injection",
+    "sent_at": "2026-08-02T22:48:11.420795+00:00"
+  },
+  {
+    "link": "https://www.euronews.com/my-europe/2026/08/02/eu-rules-on-ai-models-become-enforceable-whats-going-to-change",
+    "title": "EU rules on AI models become enforceable. What's going to change?",
+    "sent_at": "2026-08-02T22:48:11.420795+00:00"
+  },
+  {
+    "link": "https://garymarcus.substack.com/p/openais-amazing-but-vastly-oversold",
+    "title": "OpenAI’s amazing — but vastly oversold — new model Astra",
+    "sent_at": "2026-08-02T22:48:11.420795+00:00"
+  },
+  {
+    "link": "https://www.theverge.com/ai-artificial-intelligence/974265/fender-ceo-bud-cole-ai-music",
+    "title": "Fender’s CEO seems to think your bandmates are just analog AI",
+    "sent_at": "2026-08-02T22:48:11.420795+00:00"
+  },
+  {
+    "link": "https://www.theverge.com/ai-artificial-intelligence/974018/pippa-seedance-artist-royalties",
+    "title": "Is paying artists enough to convince them to embrace AI?",
+    "sent_at": "2026-08-02T22:48:11.420795+00:00"
   }
 ]
