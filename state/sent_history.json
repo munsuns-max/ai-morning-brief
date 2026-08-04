@@ -1,30 +1,5 @@
 [
   {
-    "link": "https://www.cnbc.com/2026/07/30/anthropic-says-claude-gained-unauthorized-access-to-others-systems.html",
-    "title": "Anthropic brags that its models committing crimes without being told to do so",
-    "sent_at": "2026-08-01T22:47:06.269385+00:00"
-  },
-  {
-    "link": "https://twitter.com/polynoamial/status/2083467194663571701",
-    "title": "Unreleased OpenAI model solves 10 major mathematical problems",
-    "sent_at": "2026-08-01T22:47:06.269385+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/08/01/sam-altman-is-still-making-the-case-for-parenting-via-chatgpt/",
-    "title": "Sam Altman is still making the case for parenting via ChatGPT",
-    "sent_at": "2026-08-01T22:47:06.269385+00:00"
-  },
-  {
-    "link": "https://www.wsj.com/tech/ai/nvidia-in-talks-with-openai-to-guarantee-250-billion-financing-for-data-center-3dd6eae3",
-    "title": "Nvidia in Talks with OpenAI to Guarantee $250B Financing for Data Center",
-    "sent_at": "2026-08-01T22:47:06.269385+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/07/31/google-nixes-its-earth-ai-feature-one-day-after-launch-amid-criticism-it-would-spread-misinformation/",
-    "title": "Google nixes its Earth AI feature one day after launch, amid criticism it would spread misinformation",
-    "sent_at": "2026-08-01T22:47:06.269385+00:00"
-  },
-  {
     "link": "https://www.wired.com/story/openai-anthropic-ai-hacking-sprees-illegal/",
     "title": "The OpenAI and Anthropic AI Hacking Sprees Are a Messy New Legal Frontier",
     "sent_at": "2026-08-02T22:48:11.420795+00:00"
@@ -83,5 +58,30 @@
     "link": "https://openrouter.ai/qwen/qwen3.8-max",
     "title": "Qwen 3.8 Max is on OpenRouter",
     "sent_at": "2026-08-03T22:54:51.659442+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/08/04/anthropic-signs-10-billion-deal-with-ai-cloud-startup-volta/",
+    "title": "Anthropic signs $10B deal with AI cloud startup Volta",
+    "sent_at": "2026-08-04T22:55:42.063424+00:00"
+  },
+  {
+    "link": "https://openai.com/index/apple-is-getting-this-wrong",
+    "title": "Apple is getting this wrong",
+    "sent_at": "2026-08-04T22:55:42.063424+00:00"
+  },
+  {
+    "link": "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models",
+    "title": "Third-party cyber evaluations involving OpenAI models",
+    "sent_at": "2026-08-04T22:55:42.063424+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/08/04/open-weight-ai-models-are-catching-up-to-the-frontier-the-safety-gap-remains/",
+    "title": "Open-weight AI models are catching up to the frontier. The safety gap remains.",
+    "sent_at": "2026-08-04T22:55:42.063424+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/08/04/texas-halts-new-data-centers-as-governor-calls-for-audits/",
+    "title": "Texas halts new data centers as governor calls for audits",
+    "sent_at": "2026-08-04T22:55:42.063424+00:00"
   }
 ]
