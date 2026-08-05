@@ -1,40 +1,5 @@
 [
   {
-    "link": "https://www.wired.com/story/openai-anthropic-ai-hacking-sprees-illegal/",
-    "title": "The OpenAI and Anthropic AI Hacking Sprees Are a Messy New Legal Frontier",
-    "sent_at": "2026-08-02T22:48:11.420795+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/08/01/judge-denies-xais-request-to-block-minnesota-ban-on-nudify-apps/",
-    "title": "Judge denies xAI’s request to block Minnesota ban on ‘nudify’ apps",
-    "sent_at": "2026-08-02T22:48:11.420795+00:00"
-  },
-  {
-    "link": "https://www.schneier.com/blog/archives/2026/07/anthropics-opus-5-is-better-at-resisting-prompt-injection.html",
-    "title": "Anthropic's Opus 5 Is Better at Resisting Prompt Injection",
-    "sent_at": "2026-08-02T22:48:11.420795+00:00"
-  },
-  {
-    "link": "https://www.euronews.com/my-europe/2026/08/02/eu-rules-on-ai-models-become-enforceable-whats-going-to-change",
-    "title": "EU rules on AI models become enforceable. What's going to change?",
-    "sent_at": "2026-08-02T22:48:11.420795+00:00"
-  },
-  {
-    "link": "https://garymarcus.substack.com/p/openais-amazing-but-vastly-oversold",
-    "title": "OpenAI’s amazing — but vastly oversold — new model Astra",
-    "sent_at": "2026-08-02T22:48:11.420795+00:00"
-  },
-  {
-    "link": "https://www.theverge.com/ai-artificial-intelligence/974265/fender-ceo-bud-cole-ai-music",
-    "title": "Fender’s CEO seems to think your bandmates are just analog AI",
-    "sent_at": "2026-08-02T22:48:11.420795+00:00"
-  },
-  {
-    "link": "https://www.theverge.com/ai-artificial-intelligence/974018/pippa-seedance-artist-royalties",
-    "title": "Is paying artists enough to convince them to embrace AI?",
-    "sent_at": "2026-08-02T22:48:11.420795+00:00"
-  },
-  {
     "link": "https://blog.neutrontech.ai/2026/08/03/when-cloud-ai-escapes-openai-anthropic-models-breach-live-networks/",
     "title": "When Cloud AI Escapes: OpenAI and Anthropic Models Breach Live Networks",
     "sent_at": "2026-08-03T22:54:51.659442+00:00"
@@ -83,5 +48,25 @@
     "link": "https://techcrunch.com/2026/08/04/texas-halts-new-data-centers-as-governor-calls-for-audits/",
     "title": "Texas halts new data centers as governor calls for audits",
     "sent_at": "2026-08-04T22:55:42.063424+00:00"
+  },
+  {
+    "link": "https://www.bloomberg.com/news/articles/2026-08-04/openai-says-models-breached-boundaries-during-outside-testing",
+    "title": "OpenAI, Anthropic AI Models Breached Systems During UK Safety Tests",
+    "sent_at": "2026-08-05T22:51:08.353253+00:00"
+  },
+  {
+    "link": "https://www.cnbc.com/2026/08/05/meta-debuts-muse-code-to-take-on-anthropic-and-openai-.html",
+    "title": "Meta debuts first AI coding agent to take on Anthropic and OpenAI",
+    "sent_at": "2026-08-05T22:51:08.353253+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/08/05/anthropic-is-hiring-an-ai-chip-design-team/",
+    "title": "Anthropic is hiring an AI chip design team",
+    "sent_at": "2026-08-05T22:51:08.353253+00:00"
+  },
+  {
+    "link": "https://appwrite.io/blog/post/openai-cuts-gpt-56-pricing-and-adds-fast-mode-to-the-api",
+    "title": "OpenAI cuts GPT-5.6 pricing and adds Fast mode to the API",
+    "sent_at": "2026-08-05T22:51:08.353253+00:00"
   }
 ]
