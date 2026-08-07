@@ -1,30 +1,5 @@
 [
   {
-    "link": "https://blog.neutrontech.ai/2026/08/03/when-cloud-ai-escapes-openai-anthropic-models-breach-live-networks/",
-    "title": "When Cloud AI Escapes: OpenAI and Anthropic Models Breach Live Networks",
-    "sent_at": "2026-08-03T22:54:51.659442+00:00"
-  },
-  {
-    "link": "https://techcrunch.com/2026/08/03/congresss-favorite-ai-tool-chatgpt/",
-    "title": "Congress’ favorite AI tool? ChatGPT",
-    "sent_at": "2026-08-03T22:54:51.659442+00:00"
-  },
-  {
-    "link": "https://twitter.com/etnshow/status/2084221242614202704",
-    "title": "Anthropic CEO Amodei is concerned new talent join for money rather than mission",
-    "sent_at": "2026-08-03T22:54:51.659442+00:00"
-  },
-  {
-    "link": "https://runtimewire.com/article/openai-gpt-live-voice-stack-full-duplex",
-    "title": "OpenAI rebuilt ChatGPT's voice stack so GPT-Live can listen while speaking",
-    "sent_at": "2026-08-03T22:54:51.659442+00:00"
-  },
-  {
-    "link": "https://openrouter.ai/qwen/qwen3.8-max",
-    "title": "Qwen 3.8 Max is on OpenRouter",
-    "sent_at": "2026-08-03T22:54:51.659442+00:00"
-  },
-  {
     "link": "https://techcrunch.com/2026/08/04/anthropic-signs-10-billion-deal-with-ai-cloud-startup-volta/",
     "title": "Anthropic signs $10B deal with AI cloud startup Volta",
     "sent_at": "2026-08-04T22:55:42.063424+00:00"
@@ -68,5 +43,45 @@
     "link": "https://appwrite.io/blog/post/openai-cuts-gpt-56-pricing-and-adds-fast-mode-to-the-api",
     "title": "OpenAI cuts GPT-5.6 pricing and adds Fast mode to the API",
     "sent_at": "2026-08-05T22:51:08.353253+00:00"
+  },
+  {
+    "link": "https://arstechnica.com/ai/2026/08/anthropic-confirms-plans-to-build-an-in-house-silicon-team/",
+    "title": "Anthropic will design its own hardware to power Claude",
+    "sent_at": "2026-08-07T01:28:43.682317+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/08/06/openais-new-ai-smart-speaker-will-reportedly-sell-for-between-300-and-400/",
+    "title": "OpenAI’s new AI smart speaker will reportedly sell for between $300 and $400",
+    "sent_at": "2026-08-07T01:28:43.682317+00:00"
+  },
+  {
+    "link": "https://finance.yahoo.com/technology/ai/articles/deepseek-plans-significant-price-increase-025333567.html",
+    "title": "DeepSeek Plans 'Significant' Price Increase for Its AI Services",
+    "sent_at": "2026-08-07T01:28:43.682317+00:00"
+  },
+  {
+    "link": "https://runtimewire.com/article/openai-gpt-5-6-luna-free-chatgpt-default",
+    "title": "OpenAI makes GPT-5.6 Luna the default for free ChatGPT users",
+    "sent_at": "2026-08-07T01:28:43.682317+00:00"
+  },
+  {
+    "link": "https://arstechnica.com/security/2026/08/anthropics-ai-used-fake-identities-malware-in-rogue-attack-on-github-project/",
+    "title": "Anthropic’s AI used fake identities, malware in rogue attack on GitHub project",
+    "sent_at": "2026-08-07T01:28:43.682317+00:00"
+  },
+  {
+    "link": "https://thenextweb.com/news/openai-agent-plugins-open-standard-skills-mcp",
+    "title": "OpenAI and four rivals just agreed on one standard for AI agents",
+    "sent_at": "2026-08-07T01:28:43.682317+00:00"
+  },
+  {
+    "link": "https://www.bloomberg.com/news/articles/2026-08-06/google-shifts-ai-power-to-california-in-race-against-anthropic-openai",
+    "title": "Google Shifts AI Leadership to California in Race Against Anthropic, OpenAI",
+    "sent_at": "2026-08-07T01:28:43.682317+00:00"
+  },
+  {
+    "link": "https://techcrunch.com/2026/08/03/whos-legally-to-blame-for-anthropic-and-openais-autonomous-ai-hacks-its-complicated/",
+    "title": "Who's legally to blame for Anthropic and OpenAI's autonomous AI hacks?",
+    "sent_at": "2026-08-07T01:28:43.682317+00:00"
   }
 ]
